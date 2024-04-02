@@ -74,7 +74,7 @@ function renderTaskList() {
     drop: function (event, ui) {
       const droppedCard = ui.draggable;
       const targetLaneId = $(this).attr("id");
-      droppedCard.appendTo($(this).find(".lane-cards"));
+      droppedCard.appendTo($(this).find(".drop-area"));
       updateTaskStatus(droppedCard, targetLaneId);
     }
   });
@@ -83,7 +83,7 @@ function renderTaskList() {
     const taskId = taskCard.data("task-id");
     const taskList = JSON.parse(localStorage.getItem("task")) || [];
     const updatedTasks = taskList.map((task) => {
-      if (task.id === taskId) {
+      if (task.nextId === taskId) {
         task.status = targetLaneId;
       }
       return task;
